@@ -1,0 +1,41 @@
+﻿@using Projekt151.Model
+@page "/addcity"
+@inject NavigationManager NavigationManager
+@inject Services.IStadtService CityService
+
+<h2>Create City</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@stadt.StadtName" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreateCity" value="Save" />
+                <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+
+    Stadt stadt = new Stadt();
+
+    protected async Task CreateCity()
+    {
+        await CityService.CreateCities(stadt);
+        NavigationManager.NavigateTo("listcities");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listcities");
+    }
+}     

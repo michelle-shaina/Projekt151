@@ -1,0 +1,45 @@
+﻿@page "/listemployees"
+@using Projekt151.Model
+@inject Services.IMitarbeiterService EmployeeService
+@inject Services.IRoleService RoleService
+
+<h2>Employee Details</h2>
+<p>
+    <a href="/addemployee">Create New Employee</a>
+</p>
+@if (employees == null)
+{
+<p><em>Loading...</em></p> }
+            else
+            {
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in employees)
+        {
+<tr>
+    <td>@employee.MitarbeiterName</td>
+    <td>@employee.NameStadt</td>
+    <td>
+        @if (role.RoleName == "Admin")
+        {
+            <a href='/editemployee/@employee.MitarbeiterId'>Edit</a>
+                                    <a href='/deleteemployee/@employee.MitarbeiterId'>Delete</a>
+                                }
+    </td>
+</tr>}
+    </tbody>
+</table>}
+
+@code { IEnumerable<MitarbeiterModel> employees;
+    Role role = new Role();
+            protected override async Task OnInitializedAsync()
+            {
+        role = await RoleService.SingleRole(1);
+                employees = await EmployeeService.GetEmployees();
+            } }     

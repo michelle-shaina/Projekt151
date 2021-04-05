@@ -1,0 +1,69 @@
+﻿@page "/listprojects"
+@using Projekt151.Model
+@inject Services.IProjektService ProjectService
+@inject Services.IRoleService RoleService
+
+<h2>Project Details</h2>
+<p>
+    <a href="/addprojects">Create New Project</a>
+</p>
+@if (pro == null)
+{
+    <p><em>Loading...</em></p> }
+else
+{
+    @foreach (var p in pro)
+    {
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@p.ProjektName</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@p.Beschreibung</h6>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in p.Tasks)
+                    {
+                    <tr>
+                        <td>
+                        @t.TaskName
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mitarbeiter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in p.Mitarbeiters)
+                    {
+                        <tr>
+                            <td>@m.MitarbeiterName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a href="/deleteproject" class="card-link">Delete</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    }
+}
+
+@code {
+    IEnumerable<ProjectFormatted> pro;
+    Role role = new Role();
+
+    protected override async Task OnInitializedAsync()
+    {
+        role = await RoleService.SingleRole(1);
+        pro = await ProjectService.GetP();
+    }
+}     

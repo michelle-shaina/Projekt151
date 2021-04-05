@@ -1,0 +1,47 @@
+﻿@page "/editcity/{id:int}"
+@using Projekt151.Model
+@inject NavigationManager NavigationManager
+@inject Services.IStadtService CityService
+
+<h2>Edit City</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@stadt.StadtName" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@UpdateCity" value="Update" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</form>
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    Stadt stadt = new Stadt();
+
+    protected override async Task OnInitializedAsync()
+    {
+        stadt = await CityService.SingleCity(id);
+    }
+
+    protected async Task UpdateCity()
+    {
+        await CityService.EditCity(id, stadt);
+        NavigationManager.NavigateTo("listcities");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listcities");
+    }
+}     

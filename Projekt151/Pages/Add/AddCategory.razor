@@ -1,0 +1,48 @@
+﻿@using Projekt151.Model
+@page "/addcategory"
+@inject NavigationManager NavigationManager
+@inject Services.IKategorieService CategoryService
+
+<h2>Create Category</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@kategorie.KategorieName" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Beschreibung</label>
+                <input for="Name" class="form-control" @bind="@kategorie.Beschreibung" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreatCategory" value="Save" />
+                <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code { 
+    Kategorie kategorie = new Kategorie();
+
+    protected async Task CreatCategory()
+    {
+        await CategoryService.CreateCategory(kategorie);
+        NavigationManager.NavigateTo("listcategories");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listcategories");
+    }
+}     

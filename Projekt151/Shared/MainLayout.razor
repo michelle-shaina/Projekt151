@@ -1,0 +1,82 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@using Projekt151.Model
+@inject Services.IMitarbeiterService EmployeeService
+@inject Services.IRoleService RoleService
+@*@if (isLoginValid)
+    {*@
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="content px-4">
+        @Body
+    </div>
+</div>
+
+@*else
+                {
+        <br />
+                    <form class="Login">
+                        <h1>Login</h1>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="Name" class="control-label">Username</label>
+                                    <input for="Name" placeholder="Username" class="form-control" @bind="@Username" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="City" class="control-label">Password</label>
+                                    <input for="Name" type="password" placeholder="Password" class="form-control" @bind="@Password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-primary" @onclick="@doClick" value="Save" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+    }*@
+
+
+
+@code {
+    private string Username { get; set; }
+    private string Password { get; set; }
+    private bool isLoginValid = false;
+
+    IEnumerable<MitarbeiterModel> employees;
+    MitarbeiterModel employee = new MitarbeiterModel();
+    Role role = new Role();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await EmployeeService.GetEmployees();
+    }
+    protected async Task UpdateRole()
+    {
+        await RoleService.EditRole(1, role);
+    }
+
+    void doClick()
+    {
+        foreach (var e in employees)
+        {
+            if (e.MitarbeiterName == Username && e.Password == Password)
+            {
+                role.RoleName = Username;
+                UpdateRole();
+                isLoginValid = true;
+                NavigationManager.NavigateTo("/");
+            }
+        }
+    }
+}
+
+
+

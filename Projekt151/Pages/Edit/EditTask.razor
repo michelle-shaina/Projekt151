@@ -1,0 +1,52 @@
+﻿@page "/edittask/{id:int}"
+@using Projekt151.Model
+@inject NavigationManager NavigationManager
+@inject Services.ITasksService TaskService
+
+<h2>Edit Task</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@task.TaskName" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Beschreibung</label>
+                <input for="Name" class="form-control" @bind="@task.Beschreibung" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@UpdateTask" value="Update" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</form>
+
+@code { [Parameter]
+    public int id { get; set; }
+    Tasks task = new Tasks();
+
+    protected override async Task OnInitializedAsync()
+    {
+        task = await TaskService.SingeleTask(id);
+    }
+
+    protected async Task UpdateTask()
+    {
+        await TaskService.EditTask(id, task);
+        NavigationManager.NavigateTo("listtasks");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listtasks");
+    } 
+}     

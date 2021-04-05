@@ -1,0 +1,171 @@
+﻿@page "/addprojects"
+@inject NavigationManager NavigationManager
+@inject Services.IProjektService ProjectService
+@inject Services.IMitarbeiterService EmployeeService
+@inject Services.IKategorieService CategoryService
+@inject Services.ITasksService TaskService
+@using Projekt151.Model
+
+<h3>Create Project</h3>
+<hr />
+@if (employees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Name" class="control-label">Projekt Name</label>
+            <input for="Name" class="form-control" @bind="@formattedProject.ProjektName" />
+        </div>
+    </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Beschreibung" class="control-label">Beschreibung</label>
+                <input for="Beschreibung" class="form-control" @bind="@formattedProject.Beschreibung" />
+            </div>
+    </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Date" class="control-label">Sart Date</label>
+                <br />
+                <RadzenDatePicker @bind-Value=@value DateFormat="d" Change=@(args => OnChange(args, "StartPicker", "MM/dd/yyyy HH:mm:ss")) />
+            </div>
+    </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Date" class="control-label">End Date</label>
+                <br />
+                <RadzenDatePicker @bind-Value=@value DateFormat="d" Change=@(args => OnChange(args, "EndPicker", "MM/dd/yyyy HH:mm:ss")) />
+            </div>
+    </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Employees" class="control-label">Employees</label>
+                <br />
+                <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                @bind-Value=@employeeIds Multiple="true" Placeholder="Select..."
+                                Data=@employees TextProperty="MitarbeiterName" ValueProperty="MitarbeiterId"
+                                Change=@(args => OnChange(args, "MitarbeiterName")) Style="width:400px" />
+        </div>
+    </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Tasks" class="control-label">Tasks</label>
+                <br />
+                <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                @bind-Value=@tasksIds Multiple="true" Placeholder="Select..."
+                                Data=@tasks TextProperty="TaskName" ValueProperty="TaskId"
+                                Change=@(args => OnChange(args, "TaskName")) Style="width:400px" />
+        </div>
+    </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Category" class="control-label">Category</label>
+                <select for="Category" class="form-control" @bind="@formattedProject.KategorieId">
+                    <option value="">-- Select Category --</option>
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.KategorieId">@category.KategorieName</option>
+                    }
+                </select>
+        </div>
+    </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreateProject" value="Save" />
+                <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+            </div>
+    </div>
+</div>
+       
+}
+
+
+@code {
+    object employeeIds;
+    object tasksIds;
+    ProjectFormatted formattedProject = new ProjectFormatted();
+    IEnumerable<MitarbeiterModel> employees;
+    IEnumerable<Kategorie> categories;
+    IEnumerable<Tasks> tasks;
+    List<Tasks> selectedTaks = new List<Tasks>();
+    List<Mitarbeiter> selectedEmployees = new List<Mitarbeiter>();
+    List<string> employeeNum = new List<string>();
+    List<string> tasksNum = new List<string>();
+    string taskString = "";
+    string employeeString = "";
+    DateTime? value = DateTime.Now;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await EmployeeService.GetEmployees();
+        categories = await CategoryService.GetCategories();
+        tasks = await TaskService.GetTasks();
+    }
+
+    public async Task CreateProject()
+    {
+        getTasksAndEmployeesSelected();
+        formattedProject.IsGoing = true;
+        formattedProject.Tasks = selectedTaks;
+        formattedProject.Mitarbeiters = selectedEmployees;
+        await ProjectService.CreateProjects(formattedProject);
+        NavigationManager.NavigateTo("listprojects");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listprojects");
+    }
+
+    void OnChange(DateTime? value, string name, string format)
+    {
+        if (name == "StartPicker")
+        {
+            formattedProject.StartDate = value?.ToString(format);
+        } else
+        {
+            formattedProject.EndDate = value?.ToString(format);
+        }
+    }
+
+    void getTasksAndEmployeesSelected()
+    {
+        foreach (var t in tasksNum)
+        {
+            foreach (var ta in tasks)
+            {
+                if (t == ta.TaskId.ToString())
+                {
+                    selectedTaks.Add(ta);
+                }
+            }
+        }
+        foreach (var e in employeeNum)
+        {
+            foreach (var em in employees)
+            {
+                if (e == em.MitarbeiterId.ToString())
+                {
+                    selectedEmployees.Add(em);
+                }
+            }
+        }
+    }
+
+    void OnChange(object value, string name)
+    {
+        if (name == "MitarbeiterName")
+        {
+            employeeString = string.Join(",", ((IEnumerable<string>)employeeIds));
+        } else
+        {
+            taskString = string.Join(",", ((IEnumerable<int>)tasksIds));
+        }
+        employeeNum = employeeString.Split(",").ToList();
+        tasksNum = taskString.Split(",").ToList();
+    }
+}

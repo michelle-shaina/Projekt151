@@ -1,0 +1,48 @@
+﻿@page "/listtasks"
+@inject Services.ITasksService TaskService
+@using Projekt151.Model
+@inject Services.IRoleService RoleService
+
+<h2>Tasks Details</h2>
+<p>
+    <a href="/addtask">Create New Task</a>
+</p>
+@if (tasks == null)
+{
+    <p><em>Loading...</em></p> }
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in tasks)
+            {
+                <tr>
+                    <td>@task.TaskName</td>
+                    <td>@task.Beschreibung</td>
+                    <td>
+                        @if (role.RoleName == "Admin")
+                        {
+                            <a href='/edittask/@task.TaskId'>Edit</a>
+                            <a href='/deletetask/@task.TaskId'>Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>}
+
+@code {
+    IEnumerable<Tasks> tasks;
+    Role role = new Role();
+
+    protected override async Task OnInitializedAsync()
+    {
+        role = await RoleService.SingleRole(1);
+        tasks = await TaskService.GetTasks();
+    } }  
