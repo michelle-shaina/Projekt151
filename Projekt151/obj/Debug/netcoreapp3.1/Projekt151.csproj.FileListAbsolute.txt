@@ -218,3 +218,7 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreap
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Pages\Delete\DelteRole.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Pages\Edit\EditRole.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Pages\Get\ListRoles.razor.g.cs
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\Login.razor.g.cs
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Shared\Login.razor.g.cs

@@ -36,6 +36,7 @@ namespace Projekt151
             services.AddScoped<ITasksService, TasksService>();
             services.AddScoped<IProjektService, ProjetkService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<LoginState>();
 
             var sqlConnectionConfiguration = new SqlConnectionConfiguration(Configuration.GetConnectionString("SqlDbContext"));
             services.AddSingleton(sqlConnectionConfiguration);

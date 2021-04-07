@@ -1,0 +1,63 @@
+﻿@page "/"
+@inject Data.LoginState loginState
+@inject Services.IMitarbeiterService EmployeeService
+@using Projekt151.Model
+
+
+@if (loginState.IsLoggedIn.Equals(false))
+{
+    <h1 style="text-align:center">Login</h1>
+
+    <div style="text-align:center">
+        <label>Username </label>
+        <input id="UserName: " name="UserName" type="text" @bind-value="username" />
+    </div>
+    <div style=" text-align:center">
+        <label>Password </label>
+        <input id="Password" name="Password" type="password" @bind-value="password" />
+    </div>
+    <div style="text-align:center">
+        <button type="submit" @onclick=@HandleLogin>
+            Submit
+        </button>
+    </div>
+}
+else
+{
+    <h1 style="text-align:center">Successful Login!</h1>
+    <div style="text-align:center">
+        <p> Thanks for logging in @loginState.username!</p>
+        <button type="submit" @onclick=@HandleLogout>
+            Logout
+        </button>
+    </div>
+}
+
+@code {
+    IEnumerable<MitarbeiterModel> employees;
+    string username = "";
+    string password = "";
+    string correctPassword = "Snail";
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await EmployeeService.GetEmployees();
+    }
+
+    void HandleLogin()
+    {
+        @foreach (var e in employees)
+        {
+            if (password == e.Password && username == e.MitarbeiterName)
+            {
+                loginState.SetLogin(true, username);
+            }
+        }
+    }
+    void HandleLogout()
+    {
+        username = "";
+        password = "";
+        loginState.SetLogin(false, "");
+    }
+}
