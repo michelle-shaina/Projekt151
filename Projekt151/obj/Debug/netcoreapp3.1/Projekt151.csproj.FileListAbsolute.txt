@@ -169,7 +169,6 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreap
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Get\ListProjects.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Get\ListRoles.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Get\ListTasks.razor.g.cs
-C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Index.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\Login.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\MainLayout.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\NavMenu.razor.g.cs
@@ -203,7 +202,6 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreap
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Pages\Get\ListProjects.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Pages\Get\ListRoles.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Pages\Get\ListTasks.razor.g.cs
-C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Pages\Index.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Shared\Login.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Shared\MainLayout.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Razor\Shared\NavMenu.razor.g.cs
@@ -221,3 +219,4 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreap
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Projekt151.dll
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Projekt151.pdb
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Projekt151.genruntimeconfig.cache
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Debug\netcoreapp3.1\Projekt151.csprojAssemblyReference.cache

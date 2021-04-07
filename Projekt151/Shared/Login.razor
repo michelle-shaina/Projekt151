@@ -1,6 +1,7 @@
 ﻿@page "/"
 @inject Data.LoginState loginState
 @inject Services.IMitarbeiterService EmployeeService
+@inject NavigationManager navigate
 @using Projekt151.Model
 
 
@@ -8,29 +9,33 @@
 {
     <h1 style="text-align:center">Login</h1>
 
+    <form style="width: 40%; margin: auto">
+        <div style="text-align:center">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind-value="username" />
+            </div>
+        </div>
+        <div style="text-align:center">
+            <div class="form-group">
+                <label for="Password" class="control-label">Password</label>
+                <input for="Password" type="password" class="form-control" @bind-value="password" />
+            </div>
+        </div>
+    </form>
     <div style="text-align:center">
-        <label>Username </label>
-        <input id="UserName: " name="UserName" type="text" @bind-value="username" />
-    </div>
-    <div style=" text-align:center">
-        <label>Password </label>
-        <input id="Password" name="Password" type="password" @bind-value="password" />
-    </div>
-    <div style="text-align:center">
-        <button type="submit" @onclick=@HandleLogin>
-            Submit
-        </button>
+        <button type="submit" class="btn btn-primary" @onclick="@HandleLogin">Login</button>
     </div>
 }
 else
 {
-    <h1 style="text-align:center">Successful Login!</h1>
+    @*<h1 style="text-align:center">Successful Login!</h1>
     <div style="text-align:center">
         <p> Thanks for logging in @loginState.username!</p>
-        <button type="submit" @onclick=@HandleLogout>
+        <button class="btn btn-primary" type="submit" @onclick=@HandleLogout>
             Logout
         </button>
-    </div>
+    </div>*@
 }
 
 @code {
@@ -51,13 +56,14 @@ else
             if (password == e.Password && username == e.MitarbeiterName)
             {
                 loginState.SetLogin(true, username, e.RoleName);
+                navigate.NavigateTo("listprojects");
             }
         }
     }
-    void HandleLogout()
-    {
-        username = "";
-        password = "";
-        loginState.SetLogin(false, "", "");
-    }
+    //void HandleLogout()
+    //{
+    //    username = "";
+    //    password = "";
+    //    loginState.SetLogin(false, "", "");
+    //}
 }
