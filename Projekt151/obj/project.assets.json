@@ -1735,20 +1735,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\miche\\.nuget\\packages\\": {}
+    "C:\\Users\\miche\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\miche\\source\\repos\\Projekt151-master\\Projekt151-master\\Projekt151\\Projekt151\\Projekt151.csproj",
+      "projectUniqueName": "C:\\Users\\miche\\source\\repos\\Projekt151\\Projekt151\\Projekt151\\Projekt151.csproj",
       "projectName": "Projekt151",
-      "projectPath": "C:\\Users\\miche\\source\\repos\\Projekt151-master\\Projekt151-master\\Projekt151\\Projekt151\\Projekt151.csproj",
+      "projectPath": "C:\\Users\\miche\\source\\repos\\Projekt151\\Projekt151\\Projekt151\\Projekt151.csproj",
       "packagesPath": "C:\\Users\\miche\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\miche\\source\\repos\\Projekt151-master\\Projekt151-master\\Projekt151\\Projekt151\\obj\\",
+      "outputPath": "C:\\Users\\miche\\source\\repos\\Projekt151\\Projekt151\\Projekt151\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\miche\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -1802,7 +1809,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

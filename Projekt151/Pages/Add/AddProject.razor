@@ -31,14 +31,14 @@ else
             <div class="form-group">
                 <label for="Date" class="control-label">Sart Date</label>
                 <br />
-                <RadzenDatePicker @bind-Value=@value DateFormat="d" Change=@(args => OnChange(args, "StartPicker", "MM/dd/yyyy HH:mm:ss")) />
+                <RadzenDatePicker @bind-Value=@StartDate DateFormat="d" Change=@(args => OnChange(args, "StartPicker", "dd/MM/yyyy")) />
             </div>
     </div>
         <div class="col-md-8">
             <div class="form-group">
                 <label for="Date" class="control-label">End Date</label>
                 <br />
-                <RadzenDatePicker @bind-Value=@value DateFormat="d" Change=@(args => OnChange(args, "EndPicker", "MM/dd/yyyy HH:mm:ss")) />
+                <RadzenDatePicker @bind-Value=@EndDate DateFormat="d" Change=@(args => OnChange(args, "EndPicker", "dd/MM/yyyy")) />
             </div>
     </div>
         <div class="col-md-8">
@@ -97,7 +97,8 @@ else
     List<string> tasksNum = new List<string>();
     string taskString = "";
     string employeeString = "";
-    DateTime? value = DateTime.Now;
+    DateTime? StartDate = DateTime.Now;
+    DateTime? EndDate = DateTime.Now;
 
     protected override async Task OnInitializedAsync()
     {

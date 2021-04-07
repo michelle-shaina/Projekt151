@@ -9,5 +9,6 @@ namespace Projekt151.Model
     {
         public int RoleId { get; set; }
         public string RoleName { get; set; }
+        public int MitarbeiterId { get; set; }
     }
 }

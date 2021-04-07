@@ -1,0 +1,44 @@
+﻿@page "/editrole/{id:int}"
+@using Projekt151.Model
+@inject NavigationManager NavigationManager
+@inject Services.IRoleService RoleService
+
+<h2>Edit Role</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@role.RoleName" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@UpdateRole" value="Update" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</form>
+
+@code { [Parameter]
+    public int id { get; set; }
+
+    Role role = new Role();
+
+    protected override async Task OnInitializedAsync()
+    {
+        role = await RoleService.SingleRole(id);
+    }
+
+    protected async Task UpdateRole()
+    {
+        await RoleService.EditRole(id, role);
+        NavigationManager.NavigateTo("listroles");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listroles");
+    } }     

@@ -61,11 +61,15 @@ namespace Projekt151.Services
         {
             using (var conn = new SqlConnection(_configuration.Value))
             {
+                const string deleteTasks = @"DELETE from dbo.ProjektToTask where ProjektId = @id";
+                const string deleteMitarbetier = @"DELETE FROM [dbo].[ProjektToMitarbeiter] WHERE ProjektId = @id";
                 const string query = @"delete from dbo.Projekt where ProjektId=@Id";
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
                 try
                 {
+                    await conn.ExecuteAsync(deleteTasks, new { id });
+                    await conn.ExecuteAsync(deleteMitarbetier, new { id });
                     await conn.ExecuteAsync(query, new { id }, commandType: CommandType.Text);
                 }
                 catch (Exception ex)
@@ -81,16 +85,30 @@ namespace Projekt151.Services
             return true;
         }
 
-        public  async Task<bool> EditProject(int id, ProjektModel projekt)
+        public  async Task<bool> EditProject(int id, ProjectFormatted projekt)
         {
             using (var conn = new SqlConnection(_configuration.Value))
             {
-                const string query = @"update dbo.Projekt set ProjektName = @ProjektName, Beschreibung = @Beschreibung, StartDate = @StartDate, EndDate = @EndDate, IsGoing = @IsGoing, KategorieId = @KategorieId, TaskId = @TaskId, MitarbeiterId = @MitarbeiterId where ProjektId=@Id";
+                const string query = @"update dbo.Projekt set ProjektName = @ProjektName, Beschreibung = @Beschreibung, StartDate = @StartDate, EndDate = @EndDate, IsGoing = @IsGoing, KategorieId = @KategorieId where ProjektId=@id";
+                const string deleteTasks = @"DELETE from dbo.ProjektToTask where ProjektId = @id";
+                const string deleteMitarbetier = @"DELETE FROM [dbo].[ProjektToMitarbeiter] WHERE ProjektId = @id";
+                const string insertMitarbeiter = @"INSERT INTO [dbo].[ProjektToMitarbeiter]([ProjektId],[MitarbeiterId]) VALUES (@id, @MitarbeiterId)";
+                const string insertTask = @"INSERT INTO [dbo].[ProjektToTask] ([ProjektId],[TaskId]) VALUES (@id, @TaskId)";
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
                 try
                 {
+                    await conn.ExecuteAsync(deleteTasks, new { id });
+                    await conn.ExecuteAsync(deleteMitarbetier, new { id });
                     await conn.ExecuteAsync(query, new { projekt.ProjektName, projekt.Beschreibung, projekt.StartDate, projekt.EndDate, projekt.IsGoing, projekt.KategorieId, projekt.TaskId, projekt.MitarbeiterId, id }, commandType: CommandType.Text);
+                    foreach (var m in projekt.Mitarbeiters)
+                    {
+                        await conn.ExecuteAsync(insertMitarbeiter, new { id, m.MitarbeiterId });
+                    }
+                    foreach (var t in projekt.Tasks)
+                    {
+                        await conn.ExecuteAsync(insertTask, new { id, t.TaskId });
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -197,19 +215,27 @@ namespace Projekt151.Services
             return projekt;
         }
 
-        public async Task<ProjektModel> SingleProject(int id)
+        public async Task<ProjectFormatted> SingleProject(int id)
         {
-            ProjektModel projekt = new ProjektModel();
+            IEnumerable<Tasks> tasks;
+            IEnumerable<Mitarbeiter> mitarbeiters;
+            ProjectFormatted projekt = new ProjectFormatted();
+            string mitarbeiterQuery = @"Select Top (1000) ProjektToMitarbeiter.MitarbeiterId, ProjektToMitarbeiter.ProjektId, Mitarbeiter.MitarbeiterId, Mitarbeiter.MitarbeiterName from ProjektToMitarbeiter join dbo.Mitarbeiter on ProjektToMitarbeiter.MitarbeiterId = Mitarbeiter.MitarbeiterId where ProjektToMitarbeiter.ProjektId = @id";
+            string taskQuery = @"Select Top (1000) ProjektToTask.TaskId, ProjektToTask.ProjektId, Tasks.TaskName, Tasks.TaskId, Tasks.Beschreibung from ProjektToTask join dbo.Tasks on ProjektToTask.TaskId = Tasks.TaskId where ProjektToTask.ProjektId = @id";
 
             using (var conn = new SqlConnection(_configuration.Value))
             {
-                const string query = @"select * from dbo.Projekt where ProjektId=@Id";
+                const string query = @"select * from dbo.Projekt where ProjektId=@id";
 
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
                 try
                 {
-                    projekt = await conn.QueryFirstOrDefaultAsync<ProjektModel>(query, new { id }, commandType: CommandType.Text);
+                    tasks = await conn.QueryAsync<Tasks>(taskQuery, new { id });
+                    mitarbeiters = await conn.QueryAsync<Mitarbeiter>(mitarbeiterQuery, new { id });
+                    projekt = await conn.QueryFirstOrDefaultAsync<ProjectFormatted>(query, new { id }, commandType: CommandType.Text);
+                    projekt.Tasks = tasks;
+                    projekt.Mitarbeiters = mitarbeiters;
                 }
                 catch (Exception ex)
                 {

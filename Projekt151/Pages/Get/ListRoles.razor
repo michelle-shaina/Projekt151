@@ -1,0 +1,44 @@
+﻿@using Projekt151.Model
+
+@page "/listroles"
+@inject Services.IRoleService RoleService
+
+<h2>Role Details</h2>
+<p>
+    <a href="/addrole">Create New Role</a>
+</p>
+
+@if (roles == null)
+{
+<p><em>Loading...</em></p> }
+else
+{
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in roles)
+        {
+<tr>
+    <td>@role.RoleName</td>
+    <td>
+<a href='/editrole/@role.RoleId'>Edit</a>
+                        <a href='/deleterole/@role.RoleId'>Delete</a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>}
+
+@code { 
+
+    IEnumerable<Role> roles;
+    protected override async Task OnInitializedAsync()
+    {
+        roles = await RoleService.GetRoles();
+    }
+    }

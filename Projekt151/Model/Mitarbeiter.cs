@@ -10,6 +10,7 @@ namespace Projekt151.Model
         public string MitarbeiterId { get; set; }
         public string MitarbeiterName { get; set; }
         public int StadtId { get; set; }
+        public int RoleId { get; set; }
         public string Password { get; set; }
     }
 }

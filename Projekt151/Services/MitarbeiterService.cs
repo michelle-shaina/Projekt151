@@ -26,12 +26,12 @@ namespace Projekt151.Services
             }
             using (var conn = new SqlConnection(_configuration.Value))
             {
-                const string query = @"insert into dbo.Mitarbeiter (MitarbeiterName, StadtId, Password) values (@MitarbeiterName, @StadtId, @Password)";
+                const string query = @"insert into dbo.Mitarbeiter (MitarbeiterName, StadtId, Password, RoleId) values (@MitarbeiterName, @StadtId, @Password, @RoleId)";
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
                 try
                 {
-                    await conn.ExecuteAsync(query, new { mitarbeiter.MitarbeiterName, mitarbeiter.StadtId, mitarbeiter.Password }, commandType: CommandType.Text);
+                    await conn.ExecuteAsync(query, new { mitarbeiter.MitarbeiterName, mitarbeiter.StadtId, mitarbeiter.Password, mitarbeiter.RoleId }, commandType: CommandType.Text);
                 }
                 catch (Exception ex)
                 {
@@ -78,12 +78,12 @@ namespace Projekt151.Services
             }
             using (var conn = new SqlConnection(_configuration.Value))
             {
-                const string query = @"update dbo.Mitarbeiter set MitarbeiterName = @MitarbeiterName, StadtId = @StadtId where MitarbeiterId=@Id";
+                const string query = @"update dbo.Mitarbeiter set MitarbeiterName = @MitarbeiterName, StadtId = @StadtId, RoleId = @RoleId where MitarbeiterId=@Id";
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
                 try
                 {
-                    await conn.ExecuteAsync(query, new { mitarbeiter.MitarbeiterName, mitarbeiter.StadtId, id }, commandType: CommandType.Text);
+                    await conn.ExecuteAsync(query, new { mitarbeiter.MitarbeiterName, mitarbeiter.StadtId, mitarbeiter.RoleId, id }, commandType: CommandType.Text);
                 }
                 catch (Exception ex)
                 {
@@ -103,7 +103,7 @@ namespace Projekt151.Services
             IEnumerable<MitarbeiterModel> mitarbeiter;
             using (var conn = new SqlConnection(_configuration.Value))
             {
-                const string query = @"select Mitarbeiter.MitarbeiterName, Stadt.StadtName as 'NameStadt', Stadt.StadtId, Mitarbeiter.MitarbeiterId, Mitarbeiter.Password from Mitarbeiter left join dbo.Stadt on Mitarbeiter.StadtId = Stadt.StadtId order by Mitarbeiter.MitarbeiterName";
+                const string query = @"select Mitarbeiter.MitarbeiterName, Stadt.StadtName as 'NameStadt', Stadt.StadtId, Role.RoleId, Role.RoleName, Mitarbeiter.MitarbeiterId, Mitarbeiter.Password from Mitarbeiter left join dbo.Stadt on Mitarbeiter.StadtId = Stadt.StadtId left join dbo.Role on Mitarbeiter.RoleId = Role.RoleId order by Mitarbeiter.MitarbeiterName";
 
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();

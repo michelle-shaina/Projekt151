@@ -11,8 +11,8 @@ namespace Projekt151.Services
         Task<IEnumerable<ProjektModel>> GetProjects();
         Task<IEnumerable<ProjectFormatted>> GetP();
         Task<bool> CreateProjects(ProjectFormatted projekt);
-        Task<bool> EditProject(int id, ProjektModel projekt);
-        Task<ProjektModel> SingleProject(int id);
+        Task<bool> EditProject(int id, ProjectFormatted projekt);
+        Task<ProjectFormatted> SingleProject(int id);
         Task<bool> DelteProject(int id);
     }
 }

@@ -1,0 +1,203 @@
+﻿@page "/editproject/{id:int}"
+@inject NavigationManager NavigationManager
+@inject Services.IProjektService ProjectService
+@inject Services.IMitarbeiterService EmployeeService
+@inject Services.IKategorieService CategoryService
+@inject Services.ITasksService TaskService
+@using System.Globalization
+@using Projekt151.Model
+
+<h3>Create Project</h3>
+<hr />
+@if (categories == null)
+{
+<p><em>Loading...</em></p> }
+            else
+            {
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Name" class="control-label">Projekt Name</label>
+            <input for="Name" class="form-control" @bind="@formattedProject.ProjektName" />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Beschreibung" class="control-label">Beschreibung</label>
+            <input for="Beschreibung" class="form-control" @bind="@formattedProject.Beschreibung" />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Date" class="control-label">Sart Date</label>
+            <br />
+            <RadzenDatePicker @bind-Value=@StartValue DateFormat="d" Change=@(args => OnChange(args, "StartPicker", "MM/dd/yyyy HH:mm:ss")) />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Date" class="control-label">End Date</label>
+            <br />
+            <RadzenDatePicker @bind-Value=@EndValue DateFormat="d" Change=@(args => OnChange(args, "EndPicker", "MM/dd/yyyy HH:mm:ss")) />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Employees" class="control-label">Employees</label>
+            <br />
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            @bind-Value=@mEmployees Multiple="true" Placeholder="Select..."
+                            Data=@employees TextProperty="MitarbeiterName" ValueProperty="MitarbeiterId"
+                            Change=@(args => OnChange(args, "MitarbeiterName")) Style="width:400px" />
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Tasks" class="control-label">Tasks</label>
+            <br />
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            @bind-Value=@mTasks Multiple="true" Placeholder="Select..."
+                            Data=@tasks TextProperty="TaskName" ValueProperty="TaskId"
+                            Change=@(args => OnChange(args, "TaskName")) Style="width:400px" />
+        </div>
+    </div>
+
+
+
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="Category" class="control-label">Category</label>
+            <select for="Category" class="form-control" @bind="@formattedProject.KategorieId">
+                <option value="">-- Select Category --</option>
+                @foreach (var category in categories)
+                {
+                    <option value="@category.KategorieId">@category.KategorieName</option>}
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@UpdateProject" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>}
+
+
+@code { 
+    [Parameter]
+    public int id { get;set; }
+    ProjectFormatted formattedProject = new ProjectFormatted();
+    IEnumerable<Kategorie> categories;
+    IEnumerable<Tasks> tasks;
+    IEnumerable<Mitarbeiter> employees;
+    List<Tasks> selectedTaks = new List<Tasks>();
+    List<Mitarbeiter> selectedEmployees = new List<Mitarbeiter>();
+    List<string> employeeNum = new List<string>();
+    List<string> tasksNum = new List<string>();
+    string taskString = "";
+    string employeeString = "";
+    DateTime? StartValue;
+    DateTime? EndValue;
+
+    IList<string> multipleEmployees = new List<string>();
+    IEnumerable<string> mEmployees;
+    IList<int> multipleTasks = new List<int>();
+    IEnumerable<int> mTasks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await CategoryService.GetCategories();
+        formattedProject = await ProjectService.SingleProject(id);
+        tasks = await TaskService.GetTasks();
+        employees = await EmployeeService.GetEmployees();
+        mTasks = GetTasks();
+        mEmployees = GetEmployees();
+        StartValue = DateTime.Parse(formattedProject.StartDate);
+        EndValue = DateTime.Parse(formattedProject.EndDate);
+    }
+
+    private IEnumerable<string> GetEmployees()
+    {
+        foreach (var e in formattedProject.Mitarbeiters)
+        {
+            multipleEmployees.Add(e.MitarbeiterId);
+        }
+        return multipleEmployees.AsEnumerable<string>();
+    }
+
+    private IEnumerable<int> GetTasks()
+    {
+        foreach (var t in formattedProject.Tasks)
+        {
+            multipleTasks.Add(t.TaskId);
+        }
+        return multipleTasks.AsEnumerable<int>();
+    }
+
+    public async Task UpdateProject()
+    {
+        getTasksAndEmployeesSelected();
+        formattedProject.IsGoing = true;
+        formattedProject.Tasks = selectedTaks;
+        formattedProject.Mitarbeiters = selectedEmployees;
+        await ProjectService.EditProject(id, formattedProject);
+        NavigationManager.NavigateTo("listprojects");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listprojects");
+    }
+
+    void OnChange(DateTime? value, string name, string format)
+    {
+        if (name == "StartPicker")
+        {
+            formattedProject.StartDate = value?.ToString(format);
+        }
+        else
+        {
+            formattedProject.EndDate = value?.ToString(format);
+        }
+    }
+
+    void getTasksAndEmployeesSelected()
+    {
+        foreach (var t in tasksNum)
+        {
+            foreach (var ta in tasks)
+            {
+                if (t == ta.TaskId.ToString())
+                {
+                    selectedTaks.Add(ta);
+                }
+            }
+        }
+        foreach (var e in employeeNum)
+        {
+            foreach (var em in employees)
+            {
+                if (e == em.MitarbeiterId.ToString())
+                {
+                    selectedEmployees.Add(em);
+                }
+            }
+        }
+    }
+
+    void OnChange(object value, string name)
+    {
+        if (name == "MitarbeiterName")
+        {
+            employeeString = string.Join(",", ((IEnumerable<string>)value));
+        }
+        else
+        {
+            taskString = string.Join(",", ((IEnumerable<int>)value));
+        }
+        employeeNum = employeeString.Split(",").ToList();
+        tasksNum = taskString.Split(",").ToList();
+    }
+}

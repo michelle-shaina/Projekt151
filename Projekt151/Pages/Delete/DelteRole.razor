@@ -1,0 +1,40 @@
+﻿@page "/deleterole/{id:int}"
+@using Projekt151.Model
+@inject NavigationManager NavigationManager
+@inject Services.IRoleService RoleService
+
+<h2>Confirm Delete</h2>
+<p>Are you sure you want to delete this Role with Id :<b> @id</b></p>
+<br />
+<div class="col-md-4">
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>@role.RoleName</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="button" value="Delete" @onclick="@Delete" class="btn btn-primary" />
+        <input type="button" value="Cancel" @onclick="@Cancel" class="btn" />
+    </div>
+</div>
+
+@code { [Parameter]
+    public int id { get; set; }
+    Role role = new Role();
+
+    protected override async Task OnInitializedAsync()
+    {
+        role = await RoleService.SingleRole(id);
+    }
+
+    protected async Task Delete()
+    {
+        await RoleService.DeleteRole(id);
+        NavigationManager.NavigateTo("listroles");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listcities");
+    } }     
