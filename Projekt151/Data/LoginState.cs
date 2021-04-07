@@ -9,12 +9,14 @@ namespace Projekt151.Data
     {
         public bool IsLoggedIn { get; set; }
         public string username { get; set; }
+        public string role { get; set; }
         public event Action OnChange;
 
-        public void SetLogin(bool login, string user)
+        public void SetLogin(bool login, string user, string role)
         {
             IsLoggedIn = login;
             username = user;
+            this.role = role;
             NotifyStateChanged();
         }
 

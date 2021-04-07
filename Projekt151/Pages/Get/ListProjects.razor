@@ -1,7 +1,7 @@
 ﻿@page "/listprojects"
 @using Projekt151.Model
 @inject Services.IProjektService ProjectService
-@inject Services.IRoleService RoleService
+@inject Data.LoginState loginState
 
 <h2>Project Details</h2>
 <p>
@@ -9,70 +9,62 @@
 </p>
 @if (pro == null)
 {
-    <p><em>Loading...</em></p> }
+<p><em>Loading...</em></p> }
 else
 {
 <div class="container">
     <div class="row">
         @foreach (var p in pro)
         {
-            <span></span>
-<div classs="col-sm">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">@p.ProjektName</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@p.Beschreibung</h6>
-            <table class="table">
-                <thead>
+<span></span>
+                    <div classs="col-sm">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@p.ProjektName</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">@p.Beschreibung</h6>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tasks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var t in p.Tasks)
+                                        {
                     <tr>
-                        <th>Tasks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var t in p.Tasks)
-                    {
-        <tr>
-            <td>
-                @t.TaskName
-            </td>
-        </tr>
-}
-                </tbody>
-            </table>
-            <table class="table">
-                <thead>
+                        <td>
+                            @t.TaskName
+                        </td>
+                    </tr>}
+                                    </tbody>
+                                </table>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Empoloyees</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var m in p.Mitarbeiters)
+                                        {
                     <tr>
-                        <th>Empoloyees</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var m in p.Mitarbeiters)
-                    {
-        <tr>
-            <td>@m.MitarbeiterName</td>
-        </tr>
-}
-                </tbody>
-            </table>
-            @if (role.RoleName == "Admin")
-            {
-                <a href="deleteproject/@p.ProjektId" class="card-link">Delete</a>
-                                        <a href="/editproject/@p.ProjektId" class="card-link">Edit</a>
-            }
-        </div>
+                        <td>@m.MitarbeiterName</td>
+                    </tr>}
+                                    </tbody>
+                                </table>
+                                @if (loginState.role.Equals("Admin"))
+                                {
+            <a href="deleteproject/@p.ProjektId" class="card-link">Delete</a>
+                                    <a href="/editproject/@p.ProjektId" class="card-link">Edit</a>}
+                            </div>
+                        </div>
+                    </div>}
     </div>
 </div>}
-    </div>
-</div>
-}
 
-@code {
-    IEnumerable<ProjectFormatted> pro;
-    Role role = new Role();
+@code { IEnumerable<ProjectFormatted> pro;
 
-    protected override async Task OnInitializedAsync()
-    {
-        role = await RoleService.SingleRole(1);
-        pro = await ProjectService.GetP();
-    }
-}     
+            protected override async Task OnInitializedAsync()
+            {
+                pro = await ProjectService.GetP();
+            } }     

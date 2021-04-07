@@ -26,19 +26,15 @@ else
 <tr>
     <td>@role.RoleName</td>
     <td>
-<a href='/editrole/@role.RoleId'>Edit</a>
-                        <a href='/deleterole/@role.RoleId'>Delete</a>
+        <a href='/editrole/@role.RoleId'>Edit</a>
+        <a href='/deleterole/@role.RoleId'>Delete</a>
     </td>
-</tr>
-}
+</tr>}
     </tbody>
 </table>}
 
-@code { 
-
-    IEnumerable<Role> roles;
-    protected override async Task OnInitializedAsync()
-    {
-        roles = await RoleService.GetRoles();
-    }
-    }
+@code { IEnumerable<Role> roles;
+            protected override async Task OnInitializedAsync()
+            {
+                roles = await RoleService.GetRoles();
+            } }

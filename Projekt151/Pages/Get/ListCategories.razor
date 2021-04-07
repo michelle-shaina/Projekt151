@@ -1,7 +1,7 @@
 ﻿@page "/listcategories"
 @inject Services.IKategorieService CategoryService
 @using Projekt151.Model
-@inject Services.IRoleService RoleService
+@inject Data.LoginState loginState
 
 <h2>Categories Details</h2>
 <p>
@@ -9,40 +9,35 @@
 </p>
 @if (categories == null)
 {
-    <p><em>Loading...</em></p> }
+<p><em>Loading...</em></p> }
 else
 {
-    <table class='table'>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Beschreibung</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var category in categories)
-            {
-                <tr>
-                    <td>@category.KategorieName</td>
-                    <td>@category.Beschreibung</td>
-                    <td>
-                        @if (role.RoleName == "Admin")
-                        {
-                            <a href='/editcategory/@category.KategorieId'>Edit</a>
-                            <a href='/deletecategory/@category.KategorieId'>Delete</a>
-                        }
-                    </td>
-                </tr>
-}
-        </tbody>
-    </table>}
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Beschreibung</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in categories)
+        {
+<tr>
+    <td>@category.KategorieName</td>
+    <td>@category.Beschreibung</td>
+    <td>
+        @if (loginState.role.Equals("Admin"))
+        {
+<a href='/editcategory/@category.KategorieId'>Edit</a>
+                        <a href='/deletecategory/@category.KategorieId'>Delete</a>}
+    </td>
+</tr>}
+    </tbody>
+</table>}
 
 @code { IEnumerable<Kategorie> categories;
-    Role role = new Role();
 
     protected override async Task OnInitializedAsync()
     {
         categories = await CategoryService.GetCategories();
-        role = await RoleService.SingleRole(1);
-    }
-}  
+    } }  

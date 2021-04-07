@@ -1,8 +1,8 @@
 ﻿@using Projekt151.Model
+@inject Data.LoginState loginState
 
 @page "/listcities"
 @inject Services.IStadtService StadtService
-@inject Services.IRoleService RoleService
 
 <h2>City Details</h2>
 <p>
@@ -12,8 +12,8 @@
 @if (cities == null)
 {
 <p><em>Loading...</em></p> }
-            else
-            {
+else
+{
 <table class='table'>
     <thead>
         <tr>
@@ -27,20 +27,18 @@
 <tr>
     <td>@city.StadtName</td>
     <td>
-        @if (role.RoleName == "Admin")
+        @if (loginState.role.Equals("Admin"))
         {
-            <a href='/editcity/@city.StadtId'>Edit</a>
-                                    <a href='/deletecity/@city.StadtId'>Delete</a>
-                                }
+<a href='/editcity/@city.StadtId'>Edit</a>
+                        <a href='/deletecity/@city.StadtId'>Delete</a>}
     </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>}
 
 @code { IEnumerable<Stadt> cities;
-    Role role = new Role();
-            protected override async Task OnInitializedAsync()
-            {
-        role = await RoleService.SingleRole(1);
-                cities = await StadtService.GetCities();
-            } }
+    protected override async Task OnInitializedAsync()
+    {
+        cities = await StadtService.GetCities();
+    } }

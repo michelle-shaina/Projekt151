@@ -1,7 +1,7 @@
 ﻿@page "/listemployees"
 @using Projekt151.Model
 @inject Services.IMitarbeiterService EmployeeService
-@inject Services.IRoleService RoleService
+@inject Data.LoginState loginState
 
 <h2>Employee Details</h2>
 <p>
@@ -10,8 +10,8 @@
 @if (employees == null)
 {
 <p><em>Loading...</em></p> }
-            else
-            {
+else
+{
 <table class='table'>
     <thead>
         <tr>
@@ -26,22 +26,20 @@
 <tr>
     <td>@employee.MitarbeiterName</td>
     <td>@employee.NameStadt</td>
-        <td>@employee.RoleName</td>
+    <td>@employee.RoleName</td>
     <td>
-        @if (role.RoleName == "Admin")
+        @if (loginState.role.Equals("Admin"))
         {
-            <a href='/editemployee/@employee.MitarbeiterId'>Edit</a>
-                                    <a href='/deleteemployee/@employee.MitarbeiterId'>Delete</a>
-                                }
+<a href='/editemployee/@employee.MitarbeiterId'>Edit</a>
+                        <a href='/deleteemployee/@employee.MitarbeiterId'>Delete</a>}
     </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>}
 
 @code { IEnumerable<MitarbeiterModel> employees;
-    Role role = new Role();
-            protected override async Task OnInitializedAsync()
-            {
-        role = await RoleService.SingleRole(1);
-                employees = await EmployeeService.GetEmployees();
-            } }     
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await EmployeeService.GetEmployees();
+    } }     
