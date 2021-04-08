@@ -73,6 +73,20 @@ using Projekt151.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 10 "C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\_Imports.razor"
+using Radzen.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\_Imports.razor"
+using Radzen;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\Pages\Add\AddTask.razor"
 using Projekt151.Model;
 

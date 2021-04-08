@@ -73,6 +73,20 @@ using Projekt151.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 10 "C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\_Imports.razor"
+using Radzen.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\_Imports.razor"
+using Radzen;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\Pages\Edit\EditMitarbeiter.razor"
 using Projekt151.Model;
 
