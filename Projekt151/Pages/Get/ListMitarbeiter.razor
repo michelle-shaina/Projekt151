@@ -4,9 +4,12 @@
 @inject Data.LoginState loginState
 
 <h2>Employee Details</h2>
+@if (loginState.role.Equals("Admin"))
+{
 <p>
     <a href="/addemployee">Create New Employee</a>
 </p>
+}
 @if (employees == null)
 {
 <p><em>Loading...</em></p> }

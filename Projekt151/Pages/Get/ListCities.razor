@@ -5,9 +5,12 @@
 @inject Services.IStadtService StadtService
 
 <h2>City Details</h2>
-<p>
-    <a href="/addcity">Create New City</a>
-</p>
+@if (loginState.role.Equals("Admin"))
+{
+    <p>
+        <a href="/addcity">Create New City</a>
+    </p>
+}
 
 @if (cities == null)
 {
@@ -32,8 +35,7 @@ else
 <a href='/editcity/@city.StadtId'>Edit</a>
                         <a href='/deletecity/@city.StadtId'>Delete</a>}
     </td>
-</tr>
-}
+</tr>}
     </tbody>
 </table>}
 

@@ -31,11 +31,11 @@ else
                                     <tbody>
                                         @foreach (var t in p.Tasks)
                                         {
-                    <tr>
-                        <td>
-                            @t.TaskName
-                        </td>
-                    </tr>}
+                            <tr>
+                                <td>
+                                    @t.TaskName
+                                </td>
+                            </tr>}
                                     </tbody>
                                 </table>
                                 <table class="table">
@@ -47,15 +47,15 @@ else
                                     <tbody>
                                         @foreach (var m in p.Mitarbeiters)
                                         {
-                    <tr>
-                        <td>@m.MitarbeiterName</td>
-                    </tr>}
+                            <tr>
+                                <td>@m.MitarbeiterName</td>
+                            </tr>}
                                     </tbody>
                                 </table>
+                                <a href="/editproject/@p.ProjektId" class="card-link">Edit</a>
                                 @if (loginState.role.Equals("Admin"))
                                 {
-            <a href="deleteproject/@p.ProjektId" class="card-link">Delete</a>
-                                    <a href="/editproject/@p.ProjektId" class="card-link">Edit</a>}
+                            <a href="deleteproject/@p.ProjektId" class="card-link">Delete</a>}
                             </div>
                         </div>
                     </div>}

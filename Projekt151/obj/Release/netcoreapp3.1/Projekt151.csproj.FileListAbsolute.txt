@@ -115,3 +115,22 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Release\netcore
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Pages\Edit\EditRole.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Pages\Get\ListRoles.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Shared\Login.razor.g.cs
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Properties\serviceDependencies.Projekt151-Michelle - Web Deploy3.json
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\miche\source\repos\Projekt151\Projekt151\Projekt151\bin\Release\netcoreapp3.1\Microsoft.Extensions.Primitives.dll

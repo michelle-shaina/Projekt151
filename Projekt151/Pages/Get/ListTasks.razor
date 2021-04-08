@@ -27,10 +27,10 @@ else
     <td>@task.TaskName</td>
     <td>@task.Beschreibung</td>
     <td>
+        <a href='/edittask/@task.TaskId'>Edit</a>
         @if (loginState.role.Equals("Admin"))
         {
-<a href='/edittask/@task.TaskId'>Edit</a>
-                        <a href='/deletetask/@task.TaskId'>Delete</a>}
+    <a href='/deletetask/@task.TaskId'>Delete</a>}
     </td>
 </tr>}
     </tbody>
