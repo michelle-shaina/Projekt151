@@ -3,6 +3,7 @@
 @inject NavigationManager NavigationManager
 @inject Services.IMitarbeiterService EmployeeService
 @inject Services.IStadtService CityService
+@inject Services.IRoleService RoleService 
 
 <h2>Edit Employee</h2>
 <hr />
@@ -24,6 +25,17 @@
                     }
                 </select>
             </div>
+            <div class="form-group">
+                <label for="Role" class="control-label">Role</label>
+                <select for="Role" class="form-control" @bind="@employee.RoleId">
+                    <option value="">-- Select City --</option>
+                    @foreach (var role in roles)
+                    {
+                        <option value="@role.RoleId">@role.RoleName</option>
+
+                    }
+                </select>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -41,10 +53,12 @@
 
     MitarbeiterModel employee = new MitarbeiterModel();
     IEnumerable<Stadt> cities = new List<Stadt>();
+    IEnumerable<Role> roles = new List<Role>();
 
     protected override async Task OnInitializedAsync()
     {
         cities = await CityService.GetCities();
+        roles = await RoleService.GetRoles();
         employee = await EmployeeService.SingleEmployee(id);
     }
 

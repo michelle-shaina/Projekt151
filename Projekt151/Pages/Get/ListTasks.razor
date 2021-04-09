@@ -17,7 +17,7 @@ else
     <thead>
         <tr>
             <th>Name</th>
-            <th>City</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -28,9 +28,8 @@ else
     <td>@task.Beschreibung</td>
     <td>
         <a href='/edittask/@task.TaskId'>Edit</a>
-        @if (loginState.role.Equals("Admin"))
-        {
-    <a href='/deletetask/@task.TaskId'>Delete</a>}
+        <span>|</span>
+    <a style="color: red" href='/deletetask/@task.TaskId'>Delete</a>
     </td>
 </tr>}
     </tbody>

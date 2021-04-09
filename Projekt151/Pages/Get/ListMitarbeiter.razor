@@ -34,7 +34,8 @@ else
         @if (loginState.role.Equals("Admin"))
         {
 <a href='/editemployee/@employee.MitarbeiterId'>Edit</a>
-                        <a href='/deleteemployee/@employee.MitarbeiterId'>Delete</a>}
+        <span>|</span>
+                        <a style="color: red" href='/deleteemployee/@employee.MitarbeiterId'>Delete</a>}
     </td>
 </tr>
 }

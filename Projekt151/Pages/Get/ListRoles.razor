@@ -17,7 +17,7 @@ else
     <thead>
         <tr>
             <th>Name</th>
-            <th>State</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +27,8 @@ else
     <td>@role.RoleName</td>
     <td>
         <a href='/editrole/@role.RoleId'>Edit</a>
-        <a href='/deleterole/@role.RoleId'>Delete</a>
+        <span>|</span>
+        <a style="color: red" href='/deleterole/@role.RoleId'>Delete</a>
     </td>
 </tr>}
     </tbody>

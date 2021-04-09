@@ -16,7 +16,7 @@ else
     <thead>
         <tr>
             <th>Name</th>
-            <th>Beschreibung</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -29,7 +29,8 @@ else
         @if (loginState.role.Equals("Admin"))
         {
 <a href='/editcategory/@category.KategorieId'>Edit</a>
-                        <a href='/deletecategory/@category.KategorieId'>Delete</a>}
+        <span>|</span>
+                        <a style="color: red" href='/deletecategory/@category.KategorieId'>Delete</a>}
     </td>
 </tr>}
     </tbody>

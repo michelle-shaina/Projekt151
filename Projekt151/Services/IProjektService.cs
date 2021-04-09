@@ -8,7 +8,6 @@ namespace Projekt151.Services
 {
     public interface IProjektService
     {
-        Task<IEnumerable<ProjektModel>> GetProjects();
         Task<IEnumerable<ProjectFormatted>> GetP();
         Task<bool> CreateProjects(ProjectFormatted projekt);
         Task<bool> EditProject(int id, ProjectFormatted projekt);

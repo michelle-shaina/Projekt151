@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qPO2D6TD/d/gp7YKTKZ5vD3BKR/uhlcxb0TtFnB3o9MPll6tGGz8r8Ag7e7ZQYwa8aTTnEQlbsMu4uAtXoPVNA==",
+  "dgSpecHash": "8iiU7o9CiGh+A0mDaaD8mCTw6A3GXyWMne31568V2tYrlTMwNBkXB3Gqudu5wqamD/mLiMQZwDjBDfVmeF9ZHw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\miche\\source\\repos\\Projekt151\\Projekt151\\Projekt151\\Projekt151.csproj",
+  "projectFilePath": "C:\\Users\\miche\\source\\repos\\Projekt151\\Projekt151\\Projekt151.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\miche\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\miche\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.0\\microsoft.aspnetcore.authorization.3.1.0.nupkg.sha512",
@@ -55,7 +55,7 @@
     "C:\\Users\\miche\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
     "C:\\Users\\miche\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
     "C:\\Users\\miche\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "C:\\Users\\miche\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
     "C:\\Users\\miche\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.7.0\\system.security.cryptography.protecteddata.4.7.0.nupkg.sha512",
     "C:\\Users\\miche\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\miche\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",

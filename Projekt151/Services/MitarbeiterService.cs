@@ -132,7 +132,7 @@ namespace Projekt151.Services
 
             using (var conn = new SqlConnection(_configuration.Value))
             {
-                const string query = @"select * from dbo.Mitarbeiter where MitarbeiterId=@Id";
+                const string query = @"SELECT TOP (1000) [MitarbeiterId],[MitarbeiterName],Stadt.StadtName as 'NameStadt',Mitarbeiter.[StadtId],[Password],[RoleId] FROM [Projekt151].[dbo].[Mitarbeiter] join dbo.Stadt on Mitarbeiter.StadtId = Stadt.StadtId where MitarbeiterId=@Id";
 
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();

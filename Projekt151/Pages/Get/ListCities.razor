@@ -21,7 +21,7 @@ else
     <thead>
         <tr>
             <th>Name</th>
-            <th>State</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -33,7 +33,8 @@ else
         @if (loginState.role.Equals("Admin"))
         {
 <a href='/editcity/@city.StadtId'>Edit</a>
-                        <a href='/deletecity/@city.StadtId'>Delete</a>}
+        <span>|</span>
+                        <a style="color: red" href='/deletecity/@city.StadtId'>Delete</a>}
     </td>
 </tr>}
     </tbody>

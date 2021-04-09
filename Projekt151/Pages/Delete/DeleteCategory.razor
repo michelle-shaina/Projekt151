@@ -2,10 +2,16 @@
 @using Projekt151.Model
 @inject NavigationManager NavigationManager
 @inject Services.IKategorieService CategoryService
+@inject Services.IProjektService ProjectService
+
 
 <h2>Confirm Delete</h2>
 <p>Are you sure you want to delete this Category with Id :<b> @id</b></p>
 <br />
+@if (isUsed)
+{
+    <label for="Hint" style="color: red" class="control-label">This Category is in use from at least one Project</label>
+}
 <div class="col-md-4">
     <table class="table">
         <tr>
@@ -13,29 +19,43 @@
             <td>@category.KategorieName</td>
         </tr>
         <tr>
-            <td>Beschreibung</td>
+            <td>Description</td>
             <td>@category.Beschreibung</td>
         </tr>
     </table>
     <div class="form-group">
-        <input type="button" value="Delete" @onclick="@Delete" class="btn btn-primary" />
+        <input type="button" value="Delete" @onclick="@Delete" class="btn btn-danger" />
         <input type="button" value="Cancel" @onclick="@Cancel" class="btn" />
     </div>
 </div>
 
-@code { [Parameter]
+@code { 
+    [Parameter]
     public int id { get; set; }
     Kategorie category = new Kategorie();
+    IEnumerable<ProjectFormatted> projects;
+    bool isUsed = false;
 
     protected override async Task OnInitializedAsync()
     {
+        projects = await ProjectService.GetP();
         category = await CategoryService.SingleCategory(id);
     }
 
     protected async Task Delete()
     {
-        await CategoryService.DeleteCategory(id);
-        NavigationManager.NavigateTo("listcategories");
+        foreach (var p in projects)
+        {
+            if (Convert.ToInt32(p.KategorieId) == id)
+            {
+                isUsed = true;
+            }
+        }
+        if (!isUsed)
+        {
+            await CategoryService.DeleteCategory(id);
+            NavigationManager.NavigateTo("listcategories");
+        }
     }
 
     void Cancel()

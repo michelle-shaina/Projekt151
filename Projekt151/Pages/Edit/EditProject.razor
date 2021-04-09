@@ -7,7 +7,7 @@
 @using System.Globalization
 @using Projekt151.Model
 
-<h3>Create Project</h3>
+<h3>Edit Project</h3>
 <hr />
 @if (categories == null)
 {
@@ -23,7 +23,7 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <label for="Beschreibung" class="control-label">Beschreibung</label>
+            <label for="Beschreibung" class="control-label">Description</label>
             <input for="Beschreibung" class="form-control" @bind="@formattedProject.Beschreibung" />
         </div>
     </div>

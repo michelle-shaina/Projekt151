@@ -157,63 +157,6 @@ namespace Projekt151.Services
                 }
             return (IEnumerable<ProjectFormatted>)pro;
         }
-        public async Task<IEnumerable<ProjektModel>> GetProjects()
-        {
-            IEnumerable<ProjektModel> projekt;
-            //List<ProjectFormatted> projects;
-            List<Tasks> tasks = new List<Tasks>();
-            List<Mitarbeiter> mitarbeiters = new List<Mitarbeiter>();
-            using (var conn = new SqlConnection(_configuration.Value))
-            {
-                string query = @"SELECT Top (2000) Projekt.[ProjektId],Projekt.[ProjektName],Projekt.[Beschreibung],Projekt.[StartDate],Projekt.[EndDate],Projekt.[IsGoing],Projekt.[KategorieId],Projekt.[TaskId],Projekt.[MitarbeiterId],Mitarbeiter.MitarbeiterName,Kategorie.KategorieName,Tasks.TaskName FROM [Projekt151].[dbo].[Projekt] join dbo.ProjektToMitarbeiter on ProjektToMitarbeiter.ProjektId = Projekt.ProjektId join dbo.Mitarbeiter on ProjektToMitarbeiter.MitarbeiterId = Mitarbeiter.MitarbeiterId join dbo.Kategorie on Projekt.KategorieId = Kategorie.KategorieId join dbo.Tasks on Tasks.TaskId = Projekt.TaskId";
-                string query1 = @"";
-                if (conn.State == ConnectionState.Closed)
-                    conn.Open();
-                try
-                {
-                    projekt = await conn.QueryAsync<ProjektModel>(query);
-                    var projects = await conn.QueryAsync<ProjectFormatted>(query);
-                    
-                    
-                    //foreach (var p in projekt)
-                    //{
-                    //    if (p.ProjektId == id)
-                    //    {
-                    //        tasks.Add(new Tasks
-                    //        {
-                    //            TaskId = p.TaskId,
-                    //            TaskName = p.TaskName
-                    //        });
-                    //        mitarbeiters.Add(new Mitarbeiter
-                    //        {
-                    //            MitarbeiterId = p.MitarbeiterId.ToString(),
-                    //            MitarbeiterName = p.MitarbeiterName
-                    //        });
-                    //    }
-                    //    else
-                    //    {
-                    //        id = p.ProjektId;
-                    //        projects.Add(new ProjectFormatted
-                    //        {
-                    //            ProjektName = p.ProjektName,
-                    //            Mitarbeiters = mitarbeiters,
-                    //            Tasks = tasks
-                    //        });
-                    //    }
-                    //}
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    if (conn.State == ConnectionState.Open)
-                        conn.Close();
-                }
-            }
-            return projekt;
-        }
 
         public async Task<ProjectFormatted> SingleProject(int id)
         {

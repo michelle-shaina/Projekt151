@@ -2,6 +2,7 @@
 @using Projekt151.Model
 @inject NavigationManager NavigationManager
 @inject Services.IMitarbeiterService EmployeeService
+@inject Services.IProjektService ProjectService
 
 <h2>Confirm Delete</h2>
 <p>Are you sure you want to delete this Employee with Id :<b> @id</b></p>
@@ -18,7 +19,7 @@
         </tr>
     </table>
     <div class="form-group">
-        <input type="button" value="Delete" @onclick="@Delete" class="btn btn-primary" />
+        <input type="button" value="Delete" @onclick="@Delete" class="btn btn-danger" />
         <input type="button" value="Cancel" @onclick="@Cancel" class="btn" />
     </div>
 </div>
