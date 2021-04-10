@@ -3,16 +3,16 @@
 @inherits LayoutComponentBase
 @implements IDisposable
 
-<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Projekt151</a>
-    @if (loginState.IsLoggedIn)
-    {
-        <button class="btn btn-dark" @onclick="Log">Logout</button>
-    }
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+    <div class="top-row pl-4 navbar navbar-dark">
+        @if (loginState.IsLoggedIn)
+        {
+            <a class="navbar-brand" href="">Projekt151</a>
+            <button class="btn btn-dark" @onclick="Log">Logout</button>
+        }
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">

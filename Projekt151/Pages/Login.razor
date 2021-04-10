@@ -17,8 +17,8 @@
     <form style="width: 40%; margin: auto">
         <div style="text-align:center">
             <div class="form-group">
-                <label for="Name" class="control-label">Name</label>
-                <input for="Name" class="form-control" @bind-value="username" />
+                <label aria-label="Name" for="Name" class="control-label">Name</label>
+                <input aria-label="Password" for="Name" class="form-control" @bind-value="username" />
             </div>
         </div>
         <div style="text-align:center">
@@ -32,23 +32,12 @@
         <button type="submit" class="btn btn-primary" @onclick="@HandleLogin">Login</button>
     </div>
 }
-else
-{
-    @*<h1 style="text-align:center">Successful Login!</h1>
-    <div style="text-align:center">
-        <p> Thanks for logging in @loginState.username!</p>
-        <button class="btn btn-primary" type="submit" @onclick=@HandleLogout>
-            Logout
-        </button>
-    </div>*@
-}
 
 @code {
     IEnumerable<MitarbeiterModel> employees;
     string username = "";
     string password = "";
     bool doesExist = true;
-    string correctPassword = "Snail";
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,10 +58,4 @@ else
             }
         }
     }
-    //void HandleLogout()
-    //{
-    //    username = "";
-    //    password = "";
-    //    loginState.SetLogin(false, "", "");
-    //}
 }

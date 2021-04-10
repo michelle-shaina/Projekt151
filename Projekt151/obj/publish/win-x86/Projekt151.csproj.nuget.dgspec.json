@@ -59,6 +59,18 @@
             "Radzen.Blazor": {
               "target": "Package",
               "version": "[3.1.10, )"
+            },
+            "bunit.core": {
+              "target": "Package",
+              "version": "[1.0.0-preview-02, )"
+            },
+            "bunit.web": {
+              "target": "Package",
+              "version": "[1.0.0-preview-02, )"
+            },
+            "bunit.xunit": {
+              "target": "Package",
+              "version": "[1.0.0-preview-02, )"
             }
           },
           "imports": [
