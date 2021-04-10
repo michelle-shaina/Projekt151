@@ -218,7 +218,6 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razo
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Pages\Get\ListProjects.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Pages\Get\ListRoles.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Pages\Get\ListTasks.razor.g.cs
-C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Shared\Login.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Shared\MainLayout.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Shared\NavMenu.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\_Imports.razor.g.cs
@@ -251,7 +250,6 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razo
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Pages\Get\ListProjects.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Pages\Get\ListRoles.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Pages\Get\ListTasks.razor.g.cs
-C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Shared\Login.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Shared\MainLayout.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Shared\NavMenu.razor.g.cs
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\_Imports.razor.g.cs
@@ -270,3 +268,7 @@ C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\stat
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Projekt151.dll
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Projekt151.pdb
 C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Projekt151.genruntimeconfig.cache
+C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Pages\Index.razor.g.cs
+C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\RazorDeclaration\Pages\Login.razor.g.cs
+C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Pages\Index.razor.g.cs
+C:\Users\miche\source\repos\Projekt151\Projekt151\obj\Release\netcoreapp3.1\Razor\Pages\Login.razor.g.cs

@@ -1,0 +1,78 @@
+﻿@page "/login"
+@inject Data.LoginState loginState
+@inject Services.IMitarbeiterService EmployeeService
+@inject NavigationManager navigate
+@using Projekt151.Model
+
+
+@if (loginState.IsLoggedIn.Equals(false))
+{
+    <h1 style="text-align:center">Login</h1>
+
+    @if (!doesExist)
+    {
+        <p style="color: red; text-align:center">There is no combination of the user and password found, please check the spelling an try again!</p>
+    }
+
+    <form style="width: 40%; margin: auto">
+        <div style="text-align:center">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind-value="username" />
+            </div>
+        </div>
+        <div style="text-align:center">
+            <div class="form-group">
+                <label for="Password" class="control-label">Password</label>
+                <input for="Password" type="password" class="form-control" @bind-value="password" />
+            </div>
+        </div>
+    </form>
+    <div style="text-align:center">
+        <button type="submit" class="btn btn-primary" @onclick="@HandleLogin">Login</button>
+    </div>
+}
+else
+{
+    @*<h1 style="text-align:center">Successful Login!</h1>
+    <div style="text-align:center">
+        <p> Thanks for logging in @loginState.username!</p>
+        <button class="btn btn-primary" type="submit" @onclick=@HandleLogout>
+            Logout
+        </button>
+    </div>*@
+}
+
+@code {
+    IEnumerable<MitarbeiterModel> employees;
+    string username = "";
+    string password = "";
+    bool doesExist = true;
+    string correctPassword = "Snail";
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await EmployeeService.GetEmployees();
+    }
+
+    void HandleLogin()
+    {
+        @foreach (var e in employees)
+        {
+            if (password == e.Password && username == e.MitarbeiterName)
+            {
+                loginState.SetLogin(true, username, e.RoleName);
+                navigate.NavigateTo("listprojects");
+            } else
+            {
+                doesExist = false;
+            }
+        }
+    }
+    //void HandleLogout()
+    //{
+    //    username = "";
+    //    password = "";
+    //    loginState.SetLogin(false, "", "");
+    //}
+}
